@@ -9,12 +9,14 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import io.appium.java_client.android.AndroidDriver;
 
-public class GeneralStore {
+public class GeneralStoreScroll {
+	 static AndroidDriver driver;
+	
 
 	public static void main(String[] args) throws MalformedURLException, InterruptedException {
 		DesiredCapabilities dc = new DesiredCapabilities();
-		  // Common DC (Android or IOS)
-		 dc=new DesiredCapabilities();
+		// Common DC (Android or IOS)
+		dc=new DesiredCapabilities();
 		dc.setCapability("deviceName", "sdk_gphone_x86_arm");
 		dc.setCapability("automationName", "appium");
 		dc.setCapability("platformName", "Android");
@@ -22,23 +24,35 @@ public class GeneralStore {
 		dc.setCapability("UDID", "emulator-5554");
 		dc.setCapability("appPackage", "com.androidsample.generalstore");
 		dc.setCapability("appActivity", ".SplashActivity");
-		dc.setCapability("app", "General-Store.apk");
-                 URL url=new URL("http://localhost:4723/wd/hub");
+		//dc.setCapability("app", "General-Store.apk");
+		URL url=new URL("http://localhost:4723/wd/hub");
 		
-		AndroidDriver driver=new AndroidDriver(url,dc);
+
+        driver=new AndroidDriver(url,dc);
 		
 		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
 		
 		
-		 driver.findElement(By.id("com.androidsample.generalstore:id/nameField")).sendKeys("divisht");
-		 
-		 
-		 driver.findElement(By.id("com.androidsample.generalstore:id/btnLetsShop")).click();
-		 driver.findElement(By.xpath("//android.widget.TextView[@text='ADD TO CART']")).click();
-		 
-		 driver.findElement(By.id("com.androidsample.generalstore:id/appbar_btn_cart")).click();
-		 
-		 
-		 
+		driver.findElement(By.xpath("//android.widget.TextView[@resource-id='android:id/text1']")).click();
+		scrollToElement(driver, "text", "India");
+		
+		
+		driver.findElement(By.xpath("//android.widget.TextView[@text='India']")).click();
+		
+	}
+		
+		
+
+
+
+
+  public static void scrollToElement(AndroidDriver driver,String an,String av)
+		{
+			driver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView("+an+"(\""+av+"\"))");
+		}
+	
+
 }
-}
+
+
+
