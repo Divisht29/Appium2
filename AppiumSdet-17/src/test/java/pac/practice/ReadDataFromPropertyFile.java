@@ -10,7 +10,7 @@ package pac.practice;
 		@Test
 		public void readDataTest() throws Throwable {
 			//Read the Data From Properties File
-			FileInputStream fis=new FileInputStream("/Data/commonData1.properties");
+			FileInputStream fis=new FileInputStream("data.properties");
 			
 			Properties pObject=new Properties();
 			pObject.load(fis);
